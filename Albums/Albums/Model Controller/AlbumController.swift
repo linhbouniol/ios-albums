@@ -164,7 +164,36 @@ class AlbumController {
                 completion(nil)
             }
         }.resume()
+    }
+    
+    func createAlbum(withName name: String, artist: String, genres: [String], coverArt: [URL], completion: @escaping (Error?) -> Void) {
         
+        let album = Album(name: name, artist: artist, genres: genres, coverArt: coverArt)
         
+        albums.append(album)
+        
+        put(album: album, completion: completion) // letting completion handler in put() deal with the error there
+    }
+    
+    func createSong(withTitle title: String, duration: String) -> Song {
+        let song = Song(title: title, duration: duration)
+        
+        return song
+    }
+    
+    func update(album: Album, name: String, artist: String, genres: [String], coverArt: [URL], completion: @escaping (Error?) -> Void) {
+        
+        guard let index = albums.index(of: album) else { return }
+        
+        var album = albums[index]
+        album.name = name
+        album.artist = artist
+        album.genres = genres
+        album.coverArt = coverArt
+        
+        albums.remove(at: index)
+        albums.insert(album, at: index)
+        
+        put(album: album, completion: completion)
     }
 }

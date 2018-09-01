@@ -8,11 +8,19 @@
 
 import Foundation
 
-struct Song: Codable {
+struct Song: Codable, Equatable {
     
-    let title: String
-    let duration: String
-    let id: String
+    var title: String
+    var duration: String
+    var id: String
+    
+    // initializer for song
+    init(title: String, duration: String) {
+        self.title = title
+        self.duration = duration
+        
+        self.id = UUID().uuidString
+    }
     
     enum CodingKeys: String, CodingKey {
         case duration

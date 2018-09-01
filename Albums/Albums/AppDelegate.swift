@@ -18,9 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
 //        albumController.testDecodingExampleAlbum()
-        albumController.loadFromFile { (error) in
-            print("finished loading with error: \(error)")
-        }
+//        albumController.loadFromFile { (error) in
+//            print("finished loading with error: \(error)")
+//        }
+        
+//        albumController.createAlbum(withName: "abd", artist: "adj", genres: ["asdfhja"], coverArt: [URL(string: "https://www.apple.com")!]) { (error) in
+//            if let error = error {
+//                NSLog("Error creating album: \(error)")
+//                return
+//            }
+//            print("success")
+//        }
         
         return true
     }

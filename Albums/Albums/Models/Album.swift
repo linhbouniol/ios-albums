@@ -8,14 +8,24 @@
 
 import Foundation
 
-struct Album: Codable {
+struct Album: Codable, Equatable {
     
-    let name: String
-    let artist: String
-    let id: String
-    let genres: [String]
-    let coverArt: [URL]
-    let songs: [Song]
+    var name: String
+    var artist: String
+    var id: String
+    var genres: [String]
+    var coverArt: [URL]
+    var songs: [Song]
+    
+    init(name: String, artist: String, genres: [String], coverArt: [URL]) {
+        self.name = name
+        self.artist = artist
+        self.genres = genres
+        self.coverArt = coverArt
+        
+        self.id = UUID().uuidString
+        self.songs = []
+    }
     
     enum CodingKeys: String, CodingKey {
         case name
