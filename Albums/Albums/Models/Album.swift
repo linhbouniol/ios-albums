@@ -61,7 +61,26 @@ struct Album: Codable {
 //        self.id = id
 //        self.genres = genres // keep as array here, join with commas in the VC
 //        self.songs = songs
-        self.coverArt = coverArt
+        self.coverArt = coverArt // still array here
     }
     
+    func encode(to encoder: Encoder) throws {
+        
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(name, forKey: .name)
+        try container.encode(artist, forKey: .artist)
+        try container.encode(id, forKey: .id)
+        try container.encode(genres, forKey: .genres)
+        try container.encode(songs, forKey: .songs)
+        
+        var coverArtContainer = container.nestedUnkeyedContainer(forKey: .coverArt)
+        
+        for url in coverArt {
+            let urlString = url.absoluteString
+            
+            var urlContainer = coverArtContainer.nestedContainer(keyedBy: CodingKeys.CoverArtCodingKeys.self)
+            try urlContainer.encode(urlString, forKey: .url)
+        }
+    }
 }
