@@ -10,6 +10,9 @@ import UIKit
 
 class AlbumDetailTableViewController: UITableViewController {
     
+    var albumController: AlbumController?
+    var album: Album?
+    
     // MARK: - Outlets/Actions
     
     @IBOutlet weak var albumNameTextField: UITextField!
