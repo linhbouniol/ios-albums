@@ -13,12 +13,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-//    let albumController = AlbumController()
+    let albumController = AlbumController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
 //        albumController.testDecodingExampleAlbum()
-//        albumController.testEncodingExampleAlbum()
+        albumController.loadFromFile { (error) in
+            print("finished loading with error: \(error)")
+        }
         
         return true
     }
