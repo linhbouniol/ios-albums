@@ -17,14 +17,15 @@ struct Album: Codable, Equatable {
     var coverArt: [URL]
     var songs: [Song]
     
-    init(name: String, artist: String, genres: [String], coverArt: [URL]) {
+    init(name: String, artist: String, genres: [String], coverArt: [URL], songs: [Song]) {
         self.name = name
         self.artist = artist
         self.genres = genres
         self.coverArt = coverArt
+        self.songs = songs
         
         self.id = UUID().uuidString
-        self.songs = []
+        
     }
     
     enum CodingKeys: String, CodingKey {

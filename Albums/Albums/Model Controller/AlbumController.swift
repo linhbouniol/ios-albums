@@ -166,9 +166,9 @@ class AlbumController {
         }.resume()
     }
     
-    func createAlbum(withName name: String, artist: String, genres: [String], coverArt: [URL], completion: @escaping (Error?) -> Void) {
+    func createAlbum(withName name: String, artist: String, genres: [String], coverArt: [URL], songs: [Song], completion: @escaping (Error?) -> Void) {
         
-        let album = Album(name: name, artist: artist, genres: genres, coverArt: coverArt)
+        let album = Album(name: name, artist: artist, genres: genres, coverArt: coverArt, songs: songs)
         
         albums.append(album)
         
@@ -181,8 +181,8 @@ class AlbumController {
         return song
     }
     
-    func update(album: Album, name: String, artist: String, genres: [String], coverArt: [URL], completion: @escaping (Error?) -> Void) {
-        
+    func update(album: Album, name: String, artist: String, genres: [String], coverArt: [URL], songs: [Song], completion: @escaping (Error?) -> Void) {
+
         guard let index = albums.index(of: album) else { return }
         
         var album = albums[index]
@@ -190,6 +190,7 @@ class AlbumController {
         album.artist = artist
         album.genres = genres
         album.coverArt = coverArt
+        album.songs = songs
         
         albums.remove(at: index)
         albums.insert(album, at: index)

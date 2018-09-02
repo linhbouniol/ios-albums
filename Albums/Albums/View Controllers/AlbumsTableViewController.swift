@@ -10,12 +10,12 @@ import UIKit
 
 class AlbumsTableViewController: UITableViewController {
     
-    var albumController: AlbumController?
+    var albumController = AlbumController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        albumController?.getAlbums(completion: { (error) in
+        albumController.getAlbums(completion: { (error) in
             if let error = error {
                 NSLog("Error getting album data from server: \(error)")
                 return
@@ -27,15 +27,15 @@ class AlbumsTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albumController?.albums.count ?? 0
+        return albumController.albums.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell", for: indexPath)
 
-        let album = albumController?.albums[indexPath.row]
-        cell.textLabel?.text = album?.name
-        cell.detailTextLabel?.text = album?.artist
+        let album = albumController.albums[indexPath.row]
+        cell.textLabel?.text = album.name
+        cell.detailTextLabel?.text = album.artist
 
         return cell
     }
@@ -49,7 +49,7 @@ class AlbumsTableViewController: UITableViewController {
             if segue.identifier == "ShowAlbumDetail" {
                 
                 guard let index = tableView.indexPathForSelectedRow?.row else { return }
-                let album = albumController?.albums[index]
+                let album = albumController.albums[index]
                 detailVC.album = album
             }
         }
